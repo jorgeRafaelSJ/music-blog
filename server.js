@@ -8,6 +8,10 @@ var ejs = require('ejs');
 app.engine('html', ejs.renderFile);
 app.set('view engine', 'html');
 
+//DB connection
+var mongoose = require('mongoose');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://127.0.0.1/music-blog');
+
 // serve public folder as static assets on the root route
 var publicPath = path.join(__dirname, '/');
 app.use("/", express.static(publicPath));

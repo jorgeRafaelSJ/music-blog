@@ -393,8 +393,9 @@ angular.module.factory('Post', ['$rootScope', 'PostsService', '$http', '$q', fun
 
 		save: function save() {
 			if (!undefined._id) {
-				return $http.post($rootScope.api + '/', undefined);
+				return $http.post($rootScope.api + '/posts', undefined.public());
 			}
+			return;
 		},
 
 		public: function _public() {
@@ -405,7 +406,6 @@ angular.module.factory('Post', ['$rootScope', 'PostsService', '$http', '$q', fun
 				_id: undefined._id
 			};
 		}
-
 	};
 }]);
 //# sourceMappingURL=build_es5.js.map

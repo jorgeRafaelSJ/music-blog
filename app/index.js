@@ -18,9 +18,15 @@ angular.module('app', ['ui.router'])
     	  .state('home', {
     	    url: "/",
     	    templateUrl: '../views/home.html',
-    	    controller: 'Main',
+    	    controller: 'Home',
     	    controllerAs: 'vm'
-    	  });
+    	  })
+          .state('admin', {
+            url: "/admin",
+            templateUrl: '../views/admin.html',
+            controller: "admin",
+            controllerAs: 'vm'
+          });
 
     	$urlRouterProvider.otherwise('/');
 

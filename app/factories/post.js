@@ -19,8 +19,9 @@ angular
 
 				save: () => {
 					if(!this._id) {
-						return $http.post(`${$rootScope.api}/`, this)
-					}	
+						return $http.post(`${$rootScope.api}/posts`, this.public());
+					}
+					return;	
 				},
 
 				public: () => {
@@ -31,6 +32,5 @@ angular
 						_id: this._id
 					}
 				}
-
 			}
 	}]);
