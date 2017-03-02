@@ -2,16 +2,14 @@
 
 angular
 	.module('app')
-	.controller('Main', 
+	.controller('Admin', 
 		[ '$rootScope', '$scope', 'Post', 
 		function($rootScope, $scope, Post) {
-			
-			$rootScope.api = (() => {
-				return 'http://localhost:3000';
-			})()
 
 			$scope.submitPost = (post) => {
 				console.log(post);
+				console.log($rootScope.api);
+				$scope.post = {};
 			}
 
 	}]);

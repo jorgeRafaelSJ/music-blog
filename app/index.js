@@ -3,7 +3,7 @@
 angular.module('app', ['ui.router'])
 	
 	.config([    
-		'$stateProvider',
+	'$stateProvider',
     '$urlRouterProvider',
     '$locationProvider',
     '$httpProvider',
@@ -24,7 +24,7 @@ angular.module('app', ['ui.router'])
           .state('admin', {
             url: "/admin",
             templateUrl: '../views/admin.html',
-            controller: "admin",
+            controller: 'Admin',
             controllerAs: 'vm'
           });
 

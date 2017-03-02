@@ -1,8 +1,8 @@
 angular
-	.module
+	.module('app')
 	.factory('Post', 
 		[ '$rootScope','PostsService', '$http', '$q',
-		( $rootScope, PostsService, $http, $q)=> {
+		function($rootScope, PostsService, $http, $q) {
 			return {
 				
 				title: undefined,

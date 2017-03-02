@@ -1,0 +1,9 @@
+<form novalidate id="new-post-form">
+	<label>Title</label>
+	<input type="text" ng-model="post.title"></input>
+	<label>Description</label>
+	<textarea ng-model="post.description"></textarea>
+	<label>Link</label>
+	<input type="text" ng-model="post.link"></input>
+	<button ng-click="submitPost(post)"></button>
+</form>

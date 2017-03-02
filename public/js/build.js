@@ -346,7 +346,12 @@ angular.module('app', ['ui.router']).config(['$stateProvider', '$urlRouterProvid
 	$stateProvider.state('home', {
 		url: "/",
 		templateUrl: '../views/home.html',
-		controller: 'Main',
+		controller: 'Home',
+		controllerAs: 'vm'
+	}).state('admin', {
+		url: "/admin",
+		templateUrl: '../views/admin.html',
+		controller: 'Admin',
 		controllerAs: 'vm'
 	});
 
@@ -370,13 +375,32 @@ angular.module('app').service('PostsService', ['$q', '$http', function ($q, $htt
 }]);
 "use strict";
 
-angular.module('app').controller('Main', ['$rootScope', function ($rootScope) {
+angular.module('app').controller('Admin', ['$rootScope', '$scope', 'Post', function ($rootScope, $scope, Post) {
+
+	$scope.submitPost = function (post) {
+		console.log(post);
+		console.log($rootScope.api);
+		$scope.post = {};
+	};
+}]);
+"use strict";
+
+angular.module('app').controller('Home', ['$rootScope', '$scope', function ($rootScope, $scope) {}]);
+"use strict";
+
+angular.module('app').controller('Main', ['$rootScope', '$scope', 'Post', function ($rootScope, $scope, Post) {
 
 	$rootScope.api = function () {
 		return 'http://localhost:3000';
 	}();
+
+	$scope.submitPost = function (post) {
+		console.log(post);
+	};
 }]);
-angular.module.factory('Post', ['$rootScope', 'PostsService', '$http', '$q', function ($rootScope, PostsService, $http, $q) {
+angular.module('app').factory('Post', ['$rootScope', 'PostsService', '$http', '$q', function ($rootScope, PostsService, $http, $q) {
+	var _this = this;
+
 	return {
 
 		title: undefined,
@@ -385,25 +409,25 @@ angular.module.factory('Post', ['$rootScope', 'PostsService', '$http', '$q', fun
 		_id: undefined,
 
 		setAttributes: function setAttributes(attrs) {
-			undefined.title = attrs.title;
-			undefined.description = attrs.description;
-			undefined.link = attrs.link;
-			undefined._id = attrs._id;
+			_this.title = attrs.title;
+			_this.description = attrs.description;
+			_this.link = attrs.link;
+			_this._id = attrs._id;
 		},
 
 		save: function save() {
-			if (!undefined._id) {
-				return $http.post($rootScope.api + '/posts', undefined.public());
+			if (!_this._id) {
+				return $http.post($rootScope.api + '/posts', _this.public());
 			}
 			return;
 		},
 
 		public: function _public() {
 			return {
-				title: undefined.title,
-				description: undefined.description,
-				link: undefined.link,
-				_id: undefined._id
+				title: _this.title,
+				description: _this.description,
+				link: _this.link,
+				_id: _this._id
 			};
 		}
 	};
