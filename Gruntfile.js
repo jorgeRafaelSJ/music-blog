@@ -4,7 +4,7 @@ module.exports = function(grunt) {
 			// GRUNT CONTRIB WATCH
 			watch: {
 				build: {
-					tasks: ["concat:source", "babel", "concat:add_vendors" ,"uglify:build"],
+					tasks: ["concat:source", "concat:add_vendors" ,"uglify:build"],
 					files: [
 						'app/index.js',
 						'app/controllers/*.js',

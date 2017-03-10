@@ -362,24 +362,21 @@ angular.module('app', ['ui.router']).config(['$stateProvider', '$urlRouterProvid
 		requireBase: false
 	});
 }]);
-angular.module('app').service('PostsService', ['$q', '$http', function ($q, $http) {
 
-	var save = function save() {};
-
-	var remove = function remove() {};
-
-	return {
-		save: save,
-		remove: remove
-	};
-}]);
 "use strict";
 
 angular.module('app').controller('Admin', ['$rootScope', '$scope', 'Post', function ($rootScope, $scope, Post) {
 
 	$scope.submitPost = function (post) {
-		console.log(post);
-		console.log($rootScope.api);
+
+		var newPost = new Post();
+
+		// newPost.setAttributes(post);
+
+		console.log(newPost);
+		// newPost.save().then((response)=> {
+		// 	console.log('YAY',response);
+		// })
 		$scope.post = {};
 	};
 }]);
@@ -393,43 +390,32 @@ angular.module('app').controller('Main', ['$rootScope', '$scope', 'Post', functi
 	$rootScope.api = function () {
 		return 'http://localhost:3000';
 	}();
-
-	$scope.submitPost = function (post) {
-		console.log(post);
-	};
 }]);
-angular.module('app').factory('Post', ['$rootScope', 'PostsService', '$http', '$q', function ($rootScope, PostsService, $http, $q) {
+angular.module('app').service('Post', ['$rootScope', '$http', '$q', function ($rootScope, $http, $q) {
 	var _this = this;
 
-	return {
-
-		title: undefined,
-		description: undefined,
-		link: undefined,
-		_id: undefined,
-
-		setAttributes: function setAttributes(attrs) {
-			_this.title = attrs.title;
-			_this.description = attrs.description;
-			_this.link = attrs.link;
-			_this._id = attrs._id;
-		},
-
-		save: function save() {
-			if (!_this._id) {
-				return $http.post($rootScope.api + '/posts', _this.public());
-			}
-			return;
-		},
-
-		public: function _public() {
-			return {
-				title: _this.title,
-				description: _this.description,
-				link: _this.link,
-				_id: _this._id
-			};
+	this.title = undefined, this.description = undefined, this.link = undefined, this._id = undefined, this.setAttributes = function (attrs) {
+		console.log('MADE IT INSIDE', attrs);
+		_this.title = attrs.title;
+		_this.description = attrs.description;
+		_this.link = attrs.link;
+		_this._id = attrs._id;
+		_this.created_at = attrs.created_at;
+		_this.updated_at = attrs.updated_at;
+	}, this.save = function () {
+		if (!_this._id) {
+			return $http.post($rootScope.api + '/posts', _this.public());
 		}
+		return;
+	}, this.public = function () {
+		return {
+			title: _this.title,
+			description: _this.description,
+			link: _this.link,
+			_id: _this._id,
+			created_at: _this.created_at,
+			updated_at: _this.updated_at
+		};
 	};
 }]);
 //# sourceMappingURL=build_es5.js.map

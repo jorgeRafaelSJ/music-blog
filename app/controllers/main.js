@@ -6,12 +6,7 @@ angular
 		[ '$rootScope', '$scope', 'Post', 
 		function($rootScope, $scope, Post) {
 			
-			$rootScope.api = (() => {
+			$rootScope.api = (function() {
 				return 'http://localhost:3000';
 			})()
-
-			$scope.submitPost = (post) => {
-				console.log(post);
-			}
-
 	}]);

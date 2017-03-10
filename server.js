@@ -2,6 +2,7 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+const bodyParser = require('body-parser');
 
 // set 'html' as the engine, using ejs's renderFile function
 var ejs = require('ejs');
@@ -12,6 +13,10 @@ app.set('view engine', 'html');
 var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://127.0.0.1/music-blog');
 
+
+//bodyparser
+app.use(bodyParser.urlencoded({ extended: true , limit: '5mb'}));
+
 // serve public folder as static assets on the root route
 var publicPath = path.join(__dirname, '/');
 app.use("/", express.static(publicPath));
@@ -19,6 +24,9 @@ app.use("/", express.static(publicPath));
 app.get('*', function(request, response) {
 	response.render('index');
 });
+
+//API
+app.use('/posts', require('./routes/posts'));
 
 // SERVER
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
